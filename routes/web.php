@@ -11,11 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get(
+    '/', function () {
+        return view('welcome');
+    }
+);
 
 Auth::routes();
 
 Route::resource('/reservations', 'ReservationController');
-Route::resource('/reports', 'ReportsController');
+Route::resource('/reports', 'ReportController');
+Route::get('/import-report', 'ReportController@importReportForm');
+Route::post('/import-report', 'ReportController@processReport');

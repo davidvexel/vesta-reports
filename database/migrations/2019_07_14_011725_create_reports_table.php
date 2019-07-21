@@ -13,13 +13,15 @@ class CreateReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reports', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->string('file_name')->nullable();
-            $table->integer('imported_by');
-            $table->timestamps();
-        });
+        Schema::create(
+            'reports', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->integer('user_id');
+                $table->string('file_name')->nullable();
+                $table->integer('imported_by');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

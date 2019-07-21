@@ -13,11 +13,13 @@ class CreateReservationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-	        $table->integer('report_id');
-            $table->timestamps();
-        });
+        Schema::create(
+            'reservations', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->integer('report_id');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

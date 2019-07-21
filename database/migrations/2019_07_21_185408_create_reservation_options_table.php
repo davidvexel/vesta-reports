@@ -13,12 +13,14 @@ class CreateReservationOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservation_options', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('key');
-	        $table->string('description')->nullable();
-            $table->timestamps();
-        });
+        Schema::create(
+            'reservation_options', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('key');
+                $table->string('description')->nullable();
+                $table->timestamps();
+            }
+        );
     }
 
     /**

@@ -30,7 +30,7 @@ class ReservationOptionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +41,7 @@ class ReservationOptionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ReservationOption  $reservationOption
+     * @param  \App\ReservationOption $reservationOption
      * @return \Illuminate\Http\Response
      */
     public function show(ReservationOption $reservationOption)
@@ -52,7 +52,7 @@ class ReservationOptionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ReservationOption  $reservationOption
+     * @param  \App\ReservationOption $reservationOption
      * @return \Illuminate\Http\Response
      */
     public function edit(ReservationOption $reservationOption)
@@ -63,8 +63,8 @@ class ReservationOptionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ReservationOption  $reservationOption
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\ReservationOption   $reservationOption
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ReservationOption $reservationOption)
@@ -75,7 +75,7 @@ class ReservationOptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ReservationOption  $reservationOption
+     * @param  \App\ReservationOption $reservationOption
      * @return \Illuminate\Http\Response
      */
     public function destroy(ReservationOption $reservationOption)

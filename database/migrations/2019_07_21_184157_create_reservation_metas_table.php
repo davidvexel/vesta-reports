@@ -13,13 +13,15 @@ class CreateReservationMetasTable extends Migration
      */
     public function up()
     {
-        Schema::create('reservation_metas', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('reservation_id')->unsigned();
-            $table->string('meta_key');
-            $table->string('meta_value');
-            $table->timestamps();
-        });
+        Schema::create(
+            'reservation_metas', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->integer('reservation_id')->unsigned();
+                $table->string('meta_key');
+                $table->string('meta_value');
+                $table->timestamps();
+            }
+        );
     }
 
     /**
