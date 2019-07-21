@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\ReservationsImport;
 use App\Report;
+use App\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -17,7 +18,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
+    	//
     }
 
     /**
@@ -83,27 +84,35 @@ class ReportController extends Controller
      */
     public function destroy(Report $report)
     {
-        //
+        // Delete report
+        // Delete reservations with this report
     }
 
-	/**
-	 *
-	 */
-	public function importReportForm()
+    /**
+     *
+     */
+    public function importReportForm()
     {
-    	return view('admin.import-report');
+        return view('admin.import-report');
     }
 
-	/**
-	 * Process the report importation
-	 *
-	 * @param $request
-	 */
-	public function processReport(Request $request)
+    /**
+     * Process the report importation
+     *
+     * @param $request
+     */
+    public function processReport(Request $request)
     {
-    	$user = Auth::user();
-    	$input = $request->except('_token');
+        $user = Auth::user();
+        $input = $request->except('_token');
 
-    	$import = Excel::import(new ReservationsImport($input, $user), $request->file('report'));
+        $import = Excel::import(new ReservationsImport($input, $user), $request->file('report'));
+
+        if ($import) {
+            return redirect()->to('/reservations');
+        } else {
+            return redirect()->back()->with(['error' => 'Unable to import.']);
+        }
+
     }
 }

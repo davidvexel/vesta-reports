@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Reservation;
+use App\ReservationMeta;
+use App\ReservationOption;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -14,7 +16,21 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        return view('admin.reservations');
+	    $rows = [];
+	    $reservations = Reservation::all()->toArray();
+		$available_options = ReservationOption::get('key')->toArray();
+
+	    foreach($reservations as $index => $reservation)
+	    {
+		    $rows[$index] = $reservation;
+		    $metas = ReservationMeta::where('reservation_id', $reservation['id'])->get();
+		    foreach ($metas as $meta)
+		    {
+			    $rows[$index][$meta->meta_key] = $meta->meta_value;
+		    }
+	    }
+
+	    return view('admin.reservations', compact('rows', 'available_options'));
     }
 
     /**
@@ -80,6 +96,6 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        // Delete reservation_metas with this reservation id
     }
 }
