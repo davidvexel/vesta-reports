@@ -19,7 +19,12 @@ Route::get(
 
 Auth::routes();
 
-Route::resource('/reservations', 'ReservationController');
-Route::resource('/reports', 'ReportController');
-Route::get('/import-report', 'ReportController@importReportForm');
-Route::post('/import-report', 'ReportController@processReport');
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('/reservations', 'ReservationController');
+	Route::resource('/reports', 'ReportController');
+	Route::get('/import-report', 'ReportController@importReportForm');
+	Route::post('/import-report', 'ReportController@processReport');
+	Route::get('/clients', 'UserController@getClients');
+	Route::get('/administrators', 'UserController@getAdmins');
+	Route::get('/users/create', 'UserController@create');
+});

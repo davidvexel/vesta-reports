@@ -28,7 +28,7 @@ class ReservationsImport implements ToCollection
      */
     public function collection(Collection $rows)
     {
-    	// important limit for server
+        // important limit for server
         set_time_limit(0);
 
         // 1. Verify files
@@ -49,11 +49,11 @@ class ReservationsImport implements ToCollection
         // 4. Create the reservation meta for each row field
         foreach ($rows as $index => $row)
         {
-	        if($index === 0) {
-		        continue;
-	        }
+            if($index === 0) {
+                continue;
+            }
 
-	        // titles
+            // titles
             $titles = $rows[0];
 
             // @TODO: Validate each title is a valid option

@@ -16,21 +16,21 @@ class ReservationController extends Controller
      */
     public function index()
     {
-	    $rows = [];
-	    $reservations = Reservation::all()->toArray();
-		$available_options = ReservationOption::get('key')->toArray();
+        $rows = [];
+        $reservations = Reservation::all()->toArray();
+        $available_options = ReservationOption::get('key')->toArray();
 
-	    foreach($reservations as $index => $reservation)
-	    {
-		    $rows[$index] = $reservation;
-		    $metas = ReservationMeta::where('reservation_id', $reservation['id'])->get();
-		    foreach ($metas as $meta)
-		    {
-			    $rows[$index][$meta->meta_key] = $meta->meta_value;
-		    }
-	    }
+        foreach($reservations as $index => $reservation)
+        {
+            $rows[$index] = $reservation;
+            $metas = ReservationMeta::where('reservation_id', $reservation['id'])->get();
+            foreach ($metas as $meta)
+            {
+                $rows[$index][$meta->meta_key] = $meta->meta_value;
+            }
+        }
 
-	    return view('admin.reservations', compact('rows', 'available_options'));
+        return view('admin.reservations', compact('rows', 'available_options'));
     }
 
     /**

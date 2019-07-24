@@ -37,7 +37,7 @@
 <div class="navbar navbar-expand-md navbar-dark">
     <div class="navbar-brand">
         <a href="../full/index.html" class="d-inline-block">
-            <img src="{{ asset('theme/global_assets/images/logo_light.png') }}" alt="">
+            <img src="{{ asset('theme/global_assets/images/.png') }}" alt="">
         </a>
     </div>
 
@@ -119,28 +119,28 @@
 
                     <!-- Main -->
                     <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>
-                    <li class="nav-item nav-item-open">
+                    <li class="nav-item {{ request()->is('reservations*') ? 'nav-item-open' : '' }}">
                         <a href="{{ url('/reservations') }}" class="nav-link">
-                            <i class="icon-home4"></i>
+                            <i class="icon-list"></i>
                             <span>Reservaciones</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('import-report') ? 'nav-item-open' : '' }}">
                         <a href="{{ url('/import-report') }}" class="nav-link">
-                            <i class="icon-home4"></i>
+                            <i class="icon-import"></i>
                             <span>Importar Reporte</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('clients*') ? 'nav-item-open' : '' }}">
                         <a href="{{ url('/clients') }}" class="nav-link">
-                            <i class="icon-home4"></i>
+                            <i class="icon-user-tie"></i>
                             <span>Clientes</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/clients') }}" class="nav-link">
-                            <i class="icon-home4"></i>
-                            <span>Usuarios</span>
+                    <li class="nav-item {{ request()->is('administrators*') ? 'nav-item-open' : '' }}">
+                        <a href="{{ url('/administrators') }}" class="nav-link">
+                            <i class="icon-user"></i>
+                            <span>Administradores</span>
                         </a>
                     </li>
                 </ul>
