@@ -20,6 +20,7 @@ Route::get(
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
+	Route::resource('/home', 'ReservationController');
 	Route::resource('/reservations', 'ReservationController');
 	Route::resource('/reports', 'ReportController');
 	Route::get('/import-report', 'ReportController@importReportForm');
