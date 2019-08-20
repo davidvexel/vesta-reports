@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ReservationOption;
+use App\User;
 use Illuminate\Http\Request;
 
 class ReservationOptionController extends Controller
@@ -81,5 +82,15 @@ class ReservationOptionController extends Controller
     public function destroy(ReservationOption $reservationOption)
     {
         //
+    }
+
+    public function updateClientOptions($userId, Request $request)
+    {
+    	$input = $request->except('_token');
+    	$client = User::find($userId);
+
+    	$client->reservationOptions()->sync( array_keys($input) );
+
+    	return redirect()->back()->with('success', 'Opciones actualizadas correctamente.');
     }
 }

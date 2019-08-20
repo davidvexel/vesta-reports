@@ -1,12 +1,16 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\ReservationOption;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller {
 	/**
 	 * Retrieve only admin users
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function getAdmins()
 	{
@@ -17,6 +21,8 @@ class UserController extends Controller {
 
 	/**
 	 * Retrieve only admin users
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function getClients()
 	{
@@ -27,10 +33,47 @@ class UserController extends Controller {
 
 	/**
 	 * Create user
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	 */
 	public function createClient()
 	{
 		return view('admin.clients.create');
+	}
+
+	/**
+	 * Edit a client
+	 *
+	 * @param $userId
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function editClient($userId)
+	{
+		$client = User::find($userId);
+		$options = ReservationOption::all()->keyBy('key');
+		$clientOptions = [];
+		foreach ($client->reservationOptions as $value) {
+			$clientOptions[$value->key] = $value;
+		}
+		return view('admin.clients.edit', compact('client', 'options', 'clientOptions'));
+	}
+
+	/**
+	 * Update a client
+	 *
+	 * @param $userId
+	 * @param Request $request
+	 * @return mixed
+	 */
+	public function updateClient($userId, Request $request)
+	{
+		$client = User::find($userId);
+
+		// update
+		$client->update($request->merge(['password' => Hash::make($request->get('password'))])
+			->except([$request->get('password') ? '' : 'password']
+			));
+		return redirect('/clients')->withStatus(__('User successfully updated.'));
 	}
 
 	/**
@@ -56,7 +99,7 @@ class UserController extends Controller {
 		$user->phone = $input['phone'] ? $input['phone'] : '' ;
 		$user->company = $input['company'] ? $input['company'] : '' ;
 		$user->rfc = $input['rfc'] ? $input['rfc'] : '' ;
-		$user->password = $input['password'];
+		$user->password = Hash::make( $input['password'] );
 		$user->save();
 
 		// assign user role

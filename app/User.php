@@ -37,4 +37,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function reservationOptions()
+    {
+    	return $this->belongsToMany('App\ReservationOption', 'App\ClientAvailableOption', 'user_id', 'reservation_option_id');
+    }
 }

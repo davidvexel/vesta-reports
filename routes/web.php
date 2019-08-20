@@ -27,6 +27,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/import-report', 'ReportController@processReport');
 	Route::get('/clients', 'UserController@getClients');
 	Route::get('/clients/create', 'UserController@createClient');
+	Route::get('/clients/edit/{userId}', 'UserController@editClient');
+	Route::post('/clients/update/{userId}', 'UserController@updateClient');
 	Route::get('/administrators', 'UserController@getAdmins');
 	Route::post('/users/create', 'UserController@store');
+	Route::delete('/users/destroy/{userId}', 'UserController@destroy');
+	Route::post('/clients/{userId}/options', 'ReservationOptionController@updateClientOptions');
 });
