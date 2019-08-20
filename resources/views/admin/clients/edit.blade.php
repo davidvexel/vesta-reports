@@ -71,9 +71,9 @@
                                 <div class="form-check">
                                     <input type="checkbox" id="{{ $option->id }}" name="{{ $option->id }}"
                                            class="form-check-input"
-                                               @if( array_key_exists($option->key, $clientOptions ) )
-                                                   checked
-                                               @endif
+                                           @if( array_key_exists($option->key, $clientOptions ) )
+                                               checked
+                                           @endif
                                     >
                                     <label for="{{ $option->id }}" class="form-check-label">{{ $option->key }}</label>
                                 </div>

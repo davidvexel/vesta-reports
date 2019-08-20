@@ -6,6 +6,7 @@ use App\Reservation;
 use App\ReservationMeta;
 use App\ReservationOption;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -16,10 +17,19 @@ class ReservationController extends Controller
      */
     public function index()
     {
+    	$user = Auth::user();
+
         $rows = [];
-        // Getting reservations from all clients
-        $reservations = Reservation::all()->toArray();
-        $available_options = ReservationOption::get('key')->toArray();
+
+        if ( $user->hasRole('admin') ) {
+	        // Getting reservations from all clients
+	        $reservations = Reservation::all()->toArray();
+	        $available_options = ReservationOption::get('key')->toArray();
+        } else if ( $user->hasRole('client') ) {
+	        $reservations = Reservation::where('client_id', $user->id)->get()->toArray();
+			$available_options = $user->reservationOptions->toArray();
+        }
+
 
         foreach($reservations as $index => $reservation)
         {

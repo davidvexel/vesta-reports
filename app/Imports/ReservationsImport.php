@@ -57,7 +57,12 @@ class ReservationsImport implements ToCollection
             $titles = $rows[0];
 
             // @TODO: Validate each title is a valid option
-            $reservation = Reservation::create(['report_id' => $report->id]);
+            $reservation = Reservation::create(
+            	[
+            		'report_id' => $report->id,
+		            'client_id' => $this->input['client']
+	            ]
+            );
 
             // Create reservation meta for each row title
             foreach ($titles as $rowIndex => $title)

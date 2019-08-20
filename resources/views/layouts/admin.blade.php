@@ -68,15 +68,10 @@
                 </a>
 
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
-                    <a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
-                    <a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-blue ml-auto">58</span></a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                        <i class="icon-switch2"></i> {{ __('Logout') }}
+                        <i class="icon-switch2"></i> {{ __('Cerrar Sesión') }}
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -118,13 +113,14 @@
                 <ul class="nav nav-sidebar" data-nav-type="accordion">
 
                     <!-- Main -->
-                    <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>
+                    <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Menu</div> <i class="icon-menu" title="Main"></i></li>
                     <li class="nav-item {{ request()->is('reservations*') ? 'nav-item-open' : '' }}">
                         <a href="{{ url('/reservations') }}" class="nav-link">
                             <i class="icon-list"></i>
                             <span>Reservaciones</span>
                         </a>
                     </li>
+                    @if( Auth::user()->hasRole('admin') )
                     <li class="nav-item {{ request()->is('import-report') ? 'nav-item-open' : '' }}">
                         <a href="{{ url('/import-report') }}" class="nav-link">
                             <i class="icon-import"></i>
@@ -143,6 +139,7 @@
                             <span>Administradores</span>
                         </a>
                     </li>
+                    @endif
                 </ul>
             </div>
             <!-- /main navigation -->
