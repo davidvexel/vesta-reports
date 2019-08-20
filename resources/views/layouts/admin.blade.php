@@ -131,7 +131,7 @@
                             <span>Importar Reporte</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ request()->is('clients*') ? 'nav-item-open' : '' }}">
+                    <li class="nav-item {{ request()->is('clients*') || request()->is('users/create') ? 'nav-item-open' : '' }}">
                         <a href="{{ url('/clients') }}" class="nav-link">
                             <i class="icon-user-tie"></i>
                             <span>Clientes</span>

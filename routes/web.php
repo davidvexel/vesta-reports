@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/import-report', 'ReportController@importReportForm');
 	Route::post('/import-report', 'ReportController@processReport');
 	Route::get('/clients', 'UserController@getClients');
+	Route::get('/clients/create', 'UserController@createClient');
 	Route::get('/administrators', 'UserController@getAdmins');
-	Route::get('/users/create', 'UserController@create');
+	Route::post('/users/create', 'UserController@store');
 });

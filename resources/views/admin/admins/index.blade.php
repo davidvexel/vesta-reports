@@ -7,10 +7,10 @@
 
         <!-- Basic table -->
         <div class="card">
-            <div class="card-header header-elements-inline">
+            {{--<div class="card-header header-elements-inline">
                 <h5 class="card-title">{{$title}}</h5>
                 <a class="btn btn-primary" href="/users/create">Crear Nuevo</a>
-            </div>
+            </div>--}}
 
             <div class="table-responsive">
                 <table class="table">

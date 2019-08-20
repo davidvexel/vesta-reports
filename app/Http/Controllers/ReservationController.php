@@ -17,6 +17,7 @@ class ReservationController extends Controller
     public function index()
     {
         $rows = [];
+        // Getting reservations from all clients
         $reservations = Reservation::all()->toArray();
         $available_options = ReservationOption::get('key')->toArray();
 

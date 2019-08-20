@@ -8,21 +8,21 @@
         <!-- Basic table -->
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Reservaciones</h5>
+                <h5 class="card-title">{{ __('Resumen de Reservaciones') }}</h5>
             </div>
 
-            <div class="table-responsive">
+            <div class="table-responsive table-scrollable" style="max-height: 37rem">
                 <table class="table">
                     <thead>
-                    <tr>
+                    <tr class="bg-blue">
                         @foreach($available_options as $option)
                             <th>{{$option['key']}}</th>
                         @endforeach
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($rows as $row)
-                        <tr>
+                    @foreach($rows as $i => $row)
+                        <tr class="{{ ($i % 2 == 0) ? 'table-info': '' }}">
                             @foreach($available_options as $option)
                                 @if( isset($row[$option['key']] ))
                                     <td>{!! $row[$option['key']] !!}</td>
