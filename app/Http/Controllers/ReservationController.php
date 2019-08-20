@@ -21,13 +21,15 @@ class ReservationController extends Controller
 
         $rows = [];
 
-        if ( $user->hasRole('admin') ) {
+        if ( $user->hasRole('administrator') ) {
 	        // Getting reservations from all clients
 	        $reservations = Reservation::all()->toArray();
 	        $available_options = ReservationOption::get('key')->toArray();
         } else if ( $user->hasRole('client') ) {
 	        $reservations = Reservation::where('client_id', $user->id)->get()->toArray();
 			$available_options = $user->reservationOptions->toArray();
+        } else {
+        	return 'Not valid user role';
         }
 
 

@@ -120,7 +120,7 @@
                             <span>Reservaciones</span>
                         </a>
                     </li>
-                    @if( Auth::user()->hasRole('admin') )
+                    @if( Auth::user()->hasRole('administrator') )
                     <li class="nav-item {{ request()->is('import-report') ? 'nav-item-open' : '' }}">
                         <a href="{{ url('/import-report') }}" class="nav-link">
                             <i class="icon-import"></i>

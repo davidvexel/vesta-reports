@@ -106,7 +106,7 @@ class UserController extends Controller {
 		$user->assignRole($input['role']);
 
 		// Redirect
-		if($input['role'] === 'admin') {
+		if($input['role'] === 'administrator') {
 			return redirect('/administrators');
 		} else {
 			return redirect('/clients');
