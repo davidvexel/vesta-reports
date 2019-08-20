@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Imports\ReservationsImport;
 use App\Report;
 use App\Reservation;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -93,7 +94,8 @@ class ReportController extends Controller
      */
     public function importReportForm()
     {
-        return view('admin.import-report');
+    	$clients = User::role('client')->get();
+        return view('admin.import-report', compact('clients'));
     }
 
     /**
