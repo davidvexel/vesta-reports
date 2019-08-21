@@ -23,10 +23,16 @@
     <script src="{{ asset('theme/global_assets/js/main/jquery.min.js') }}"></script>
     <script src="{{ asset('theme/global_assets/js/main/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('theme/global_assets/js/plugins/loaders/blockui.min.js') }}"></script>
+    <script src="{{ asset('theme/global_assets/js/plugins/ui/moment/moment.min.js') }}"></script>
+
+    <script src="{{ asset('theme/global_assets/js/plugins/pickers/daterangepicker.js') }}"></script>
+
     <!-- /core JS files -->
 
     <!-- Theme JS files -->
     <script src="{{ asset('theme/assets/js/app.js') }}"></script>
+    <script src="{{ asset('theme/global_assets/js/picker_date.js') }}"></script>
+
     <!-- /theme JS files -->
 
 </head>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Reservation;
 use App\ReservationMeta;
 use App\ReservationOption;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,23 +16,44 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
     	$user = Auth::user();
 
         $rows = [];
 
-        if ( $user->hasRole('administrator') ) {
+	    $query = Reservation::query();
+
+	    $defaultRange = '';
+
+	    if ( $user->hasRole('administrator') ) {
 	        // Getting reservations from all clients
-	        $reservations = Reservation::all()->toArray();
 	        $available_options = ReservationOption::get('key')->toArray();
         } else if ( $user->hasRole('client') ) {
-	        $reservations = Reservation::where('client_id', $user->id)->get()->toArray();
+	        $query->where('client_id', $user->id);
 			$available_options = $user->reservationOptions->toArray();
         } else {
         	return 'Not valid user role';
         }
 
+        if ( $request->has('dateFilter') ) {
+        	$filter = $request->dateFilter;
+
+        	$filter = explode(' - ', $filter);
+
+        	if ( isset( $filter[0] ) && ! empty( $filter[0] ) && isset( $filter[1] ) && ! empty( $filter[1] ) ) {
+		        // Query between but sub/add 1 day for more precision
+		        $query->whereBetween(
+			        'created_at',
+			        [
+				        Carbon::parse($filter[0])->subDay(),
+				        Carbon::parse($filter[1])->addDay(),
+			        ]
+		        );
+	        }
+        }
+
+	    $reservations = $query->get()->toArray();
 
         foreach($reservations as $index => $reservation)
         {
@@ -43,7 +65,7 @@ class ReservationController extends Controller
             }
         }
 
-        return view('admin.reservations', compact('rows', 'available_options'));
+        return view('admin.reservations', compact('rows', 'available_options', 'defaultRange'));
     }
 
     /**
